@@ -12,7 +12,8 @@ export const renderer = jsxRenderer(({ children }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="/hyper.css" />
+        <link rel="stylesheet" href="/hyper-base.css" />
+        <link rel="stylesheet" href="/hyper-ui.css" />
       </head>
       <body>
         <div class="fx fx-1"></div>
