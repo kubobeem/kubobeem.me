@@ -1,0 +1,8 @@
+name = "kubobeem-me"
+compatibility_date = "2026-08-01"
+pages_build_output_dir = "./dist"
+
+# Optional: KV for visitor counter etc.
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "your-kv-id"
