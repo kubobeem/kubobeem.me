@@ -196,4 +196,37 @@ app.get('/api/status', (c) => {
   })
 })
 
+// Scanner bait ｗ
+app.get('/.env', (c) => {
+  const body = [
+    '# ========================================',
+    '#  おや、.env を見に来ましたね',
+    '#  残念、ここには何もありません',
+    '# ========================================',
+    '',
+    'SECRET_KEY=あなたはスキャナですか？',
+    'API_TOKEN=帰ってください',
+    'DATABASE_URL=postgres://nobody:nowhere@127.0.0.1:5432/lol',
+    'AWS_ACCESS_KEY_ID=AKIA_NOPE',
+    'AWS_SECRET_ACCESS_KEY=this_is_not_a_real_key_go_home',
+    'OPENAI_API_KEY=sk-このサイトにAIの鍵はないよ',
+    'FLAG=flag{nice_try_but_no}',
+    'ADMIN_PASSWORD=password123は使ってません',
+    '',
+    '# くぁーより',
+    '# サブ垢の個人ページです。攻撃はやめようね',
+    '',
+  ].join('\n')
+
+  return c.text(body, 200, {
+    'Content-Type': 'text/plain; charset=utf-8',
+    'X-Robots-Tag': 'noindex',
+    'X-Trolled': 'true',
+  })
+})
+
+app.get('/.env.local', (c) => c.redirect('/.env', 302))
+app.get('/.env.production', (c) => c.redirect('/.env', 302))
+app.get('/.env.development', (c) => c.redirect('/.env', 302))
+
 export default app
