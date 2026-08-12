@@ -1,21 +1,9 @@
 import { Hono } from 'hono'
 import { renderer } from './renderer'
 
-type Env = {
-  Bindings: {
-    BOARD_KV?: KVNamespace
-  }
-}
-
-const app = new Hono<Env>()
+const app = new Hono()
 
 app.use('*', renderer)
-
-type Post = { id: string; name: string; body: string; at: string; ts: number }
-const boardMem: Post[] = []
-const MAX_POSTS = 50
-const MAX_BODY = 280
-const MAX_NAME = 24
 
 app.get('/', (c) => {
   return c.render(
@@ -117,7 +105,7 @@ app.get('/', (c) => {
 
       <section class="card" id="lab-teaser">
         <h2>実験室</h2>
-        <p>掲示板・謎の立体・速度測定・ラングトンの蟻。</p>
+        <p>三重振り子・ローレンツアトラクタ・ラングトンの蟻・謎の立体。</p>
         <p><a href="/lab">実験室を開く →</a></p>
       </section>
 
@@ -169,15 +157,73 @@ app.get('/lab', (c) => {
       <a class="back-link" href="/">← トップへ</a>
       <header class="hero lab-intro">
         <h1>実験室</h1>
-        <p class="subtitle">変なものを置いてある場所</p>
+        <p class="subtitle">数学と物理のおもちゃ箱</p>
       </header>
 
       <nav class="nav">
-        <a href="#object">立体</a>
-        <a href="#board">掲示板</a>
-        <a href="#speed">速度</a>
+        <a href="#pendulum">振り子</a>
+        <a href="#lorenz">ローレンツ</a>
         <a href="#ant">蟻</a>
+        <a href="#object">立体</a>
       </nav>
+
+      <section class="card" id="pendulum">
+        <h2>三重振り子</h2>
+        <p>
+          3本の剛体棒が関節でつながった系。微小な初期差がやがて大きく分かれる、
+          決定論的カオスの定番です。先端の軌跡を残しています。
+        </p>
+        <div class="sim-wrap">
+          <canvas class="sim-canvas" id="pendulum-canvas" width="640" height="420"></canvas>
+          <div class="sim-controls">
+            <button type="button" class="lab-btn" id="pend-toggle">一時停止</button>
+            <button type="button" class="lab-btn" id="pend-reset">リセット</button>
+            <button type="button" class="lab-btn" id="pend-nudge">少し揺らす</button>
+            <span class="sim-meta" id="pend-energy">E ≈ —</span>
+          </div>
+        </div>
+        <p class="math-note">
+          状態は角度 θ₁,θ₂,θ₃ と角速度。ラグランジュ方程式を RK4 で積分しています（簡易モデル）。
+        </p>
+      </section>
+
+      <section class="card" id="lorenz">
+        <h2>ローレンツ・アトラクタ</h2>
+        <p>
+          気象モデルから生まれた連続力学系。蝶の羽のようなストレンジ・アトラクタに収束しつつ、
+          軌道は決して周期的になりません。
+        </p>
+        <div class="sim-wrap">
+          <canvas class="sim-canvas" id="lorenz-canvas" width="640" height="400"></canvas>
+          <div class="sim-controls">
+            <button type="button" class="lab-btn" id="lorenz-toggle">一時停止</button>
+            <button type="button" class="lab-btn" id="lorenz-reset">リセット</button>
+          </div>
+        </div>
+        <p class="math-note">
+          dx/dt = σ(y−x), dy/dt = x(ρ−z)−y, dz/dt = xy−βz　（σ=10, ρ=28, β=8/3）
+        </p>
+      </section>
+
+      <section class="card" id="ant">
+        <h2>ラングトンの蟻</h2>
+        <p>
+          白いマスでは右折して黒く塗り、黒いマスでは左折して白く戻す。
+          約1万歩あたりから「高速道路」と呼ばれる周期的なパターンが現れます。
+        </p>
+        <div class="sim-wrap">
+          <canvas class="sim-canvas" id="ant-canvas" width="640" height="360"></canvas>
+          <div class="sim-controls">
+            <button type="button" class="lab-btn" id="ant-toggle">一時停止</button>
+            <button type="button" class="lab-btn" id="ant-reset">リセット</button>
+            <label>
+              速度
+              <input type="range" id="ant-speed" min="1" max="200" value="40" />
+            </label>
+            <span class="sim-meta" id="ant-steps">0 steps</span>
+          </div>
+        </div>
+      </section>
 
       <section class="card" id="object">
         <h2>謎の回る 3D Object</h2>
@@ -191,47 +237,7 @@ app.get('/lab', (c) => {
             <div class="face f6">·</div>
           </div>
         </div>
-        <p class="mystery-cap">正体不明。触っても何も起きない。ただ回っている。</p>
-      </section>
-
-      <section class="card" id="board">
-        <h2>簡易掲示板</h2>
-        <p class="muted">メモリ上の簡易版です。デプロイやコールドスタートで消えることがあります。</p>
-        <form id="board-form">
-          <input name="name" type="text" maxlength="24" placeholder="名前（省略可）" autocomplete="nickname" />
-          <textarea name="body" maxlength="280" placeholder="ひとこと（280字まで）" required></textarea>
-          <button type="submit">投稿する</button>
-        </form>
-        <div id="board-list">
-          <p class="muted">読み込み中…</p>
-        </div>
-      </section>
-
-      <section class="card" id="speed">
-        <h2>インターネット速度測定</h2>
-        <p>Cloudflare Worker 経由でダウンロード／アップロードを測ります。</p>
-        <button type="button" class="lab-btn" id="speed-btn">測定開始</button>
-        <div id="speed-result" class="muted">ボタンを押すと測定します。</div>
-      </section>
-
-      <section class="card" id="ant">
-        <h2>ラングトンの蟻</h2>
-        <p>
-          白いマスでは右に曲がり黒く塗る。黒いマスでは左に曲がり白く戻す。
-          十分に歩くと、突然「高速道路」を建て始める有名なセル・オートマトンです。
-        </p>
-        <div class="ant-wrap">
-          <canvas id="ant-canvas" width="640" height="360"></canvas>
-          <div class="ant-controls">
-            <button type="button" class="lab-btn" id="ant-toggle">一時停止</button>
-            <button type="button" class="lab-btn" id="ant-reset">リセット</button>
-            <label>
-              速度
-              <input type="range" id="ant-speed" min="1" max="200" value="40" />
-            </label>
-            <span id="ant-steps">0 steps</span>
-          </div>
-        </div>
+        <p class="mystery-cap">数学ではない。ただ回っている。</p>
       </section>
 
       <footer>
@@ -249,67 +255,10 @@ app.get('/api/status', (c) => {
   return c.json({
     status: 'ok',
     site: 'kubobeem.me',
-    version: '5.1.0',
+    version: '5.2.0',
     design: 'liquid-glass',
+    lab: ['triple-pendulum', 'lorenz', 'langton-ant', 'mystery-cube'],
     timestamp: new Date().toISOString(),
-  })
-})
-
-app.get('/api/board', (c) => {
-  return c.json({
-    posts: boardMem.slice().reverse(),
-    count: boardMem.length,
-    ephemeral: true,
-  })
-})
-
-app.post('/api/board', async (c) => {
-  let data: { name?: string; body?: string }
-  try {
-    data = await c.req.json()
-  } catch {
-    return c.json({ error: 'JSON が読めません' }, 400)
-  }
-  const name = String(data.name ?? '匿名').trim().slice(0, MAX_NAME) || '匿名'
-  const body = String(data.body ?? '').trim().slice(0, MAX_BODY)
-  if (!body) return c.json({ error: '本文が空です' }, 400)
-  if (boardMem.length && boardMem[boardMem.length - 1].body === body) {
-    return c.json({ error: '同じ内容が連続しています' }, 429)
-  }
-  const post: Post = {
-    id: crypto.randomUUID(),
-    name,
-    body,
-    at: new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }),
-    ts: Date.now(),
-  }
-  boardMem.push(post)
-  while (boardMem.length > MAX_POSTS) boardMem.shift()
-  return c.json({ ok: true, post }, 201)
-})
-
-app.get('/api/speed/download', (c) => {
-  const raw = Number(c.req.query('bytes') || '1048576')
-  const bytes = Math.min(Math.max(raw, 1024), 8 * 1024 * 1024)
-  const buf = new Uint8Array(bytes)
-  for (let i = 0; i < bytes; i += 4096) {
-    buf[i] = i & 255
-  }
-  return new Response(buf, {
-    headers: {
-      'Content-Type': 'application/octet-stream',
-      'Content-Length': String(bytes),
-      'Cache-Control': 'no-store',
-      'Access-Control-Allow-Origin': '*',
-    },
-  })
-})
-
-app.post('/api/speed/upload', async (c) => {
-  const ab = await c.req.arrayBuffer()
-  return c.json({
-    received: ab.byteLength,
-    ok: true,
   })
 })
 
