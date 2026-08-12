@@ -5,10 +5,11 @@ export const renderer = jsxRenderer(({ children }) => {
     <html lang="ja">
       <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="description" content="くぁー — 個人ページ" />
-        <meta name="theme-color" content="#f5f5f7" />
-        <title>くぁー | kubobeem.me</title>
+        <meta name="theme-color" content="#e8e8ed" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <title>くぁー</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -18,6 +19,7 @@ export const renderer = jsxRenderer(({ children }) => {
         <div class="bg-mesh" aria-hidden="true"></div>
         <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
         <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+        <div class="bg-glow bg-glow-3" aria-hidden="true"></div>
         {children}
       </body>
     </html>
