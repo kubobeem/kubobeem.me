@@ -1,14 +1,8 @@
-.lab-grid {
-  display: grid;
-  gap: 1.1rem;
-}
-
 .lab-intro {
   text-align: center;
   margin-bottom: 0.5rem;
 }
 
-/* 3D object */
 .scene-3d {
   perspective: 600px;
   height: 220px;
@@ -56,80 +50,23 @@
   letter-spacing: -0.01em;
 }
 
-/* Board */
-#board-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  margin-bottom: 1rem;
-}
-#board-form input,
-#board-form textarea {
-  font-family: var(--font);
-  font-size: 0.9375rem;
-  padding: 0.7rem 0.85rem;
-  border-radius: 14px;
-  border: 0.5px solid rgba(255,255,255,0.7);
-  background: rgba(255,255,255,0.5);
-  backdrop-filter: blur(12px);
-  color: var(--text);
-  outline: none;
-  letter-spacing: -0.015em;
-}
-#board-form textarea { min-height: 72px; resize: vertical; }
-#board-form button,
 .lab-btn {
   font-family: var(--font);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  padding: 0.65rem 1.1rem;
+  padding: 0.55rem 1rem;
   border-radius: 980px;
-  border: 0.5px solid rgba(255,255,255,0.6);
-  background: rgba(0, 113, 227, 0.9);
-  color: #fff;
+  border: 0.5px solid rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.55);
+  color: var(--text);
   cursor: pointer;
-  align-self: flex-start;
-  box-shadow: 0 4px 16px rgba(0, 113, 227, 0.25);
   transition: transform 0.2s, opacity 0.2s;
 }
-#board-form button:hover,
 .lab-btn:hover { opacity: 0.92; transform: translateY(-1px); }
-#board-form button:disabled,
-.lab-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-.board-post {
-  padding: 0.85rem 0;
-  border-bottom: 0.5px solid var(--separator);
-}
-.board-post:last-child { border-bottom: none; }
-.board-meta {
-  font-size: 0.75rem;
-  color: var(--text-3);
-  margin-bottom: 0.25rem;
-}
-.board-body {
-  font-size: 0.9375rem;
-  color: var(--text);
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-.muted { color: var(--text-3); font-size: 0.875rem; }
-
-/* Speed */
-#speed-result {
-  margin-top: 1rem;
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  color: var(--text-2);
-}
-#speed-result strong { color: var(--text); font-weight: 600; }
-
-/* Ant */
-.ant-wrap {
-  margin-top: 0.75rem;
-}
-#ant-canvas {
+.sim-wrap { margin-top: 0.75rem; }
+.sim-canvas {
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -140,30 +77,31 @@
     0 4px 16px rgba(0,0,0,0.08),
     inset 0 0 0 0.5px rgba(255,255,255,0.1);
 }
-.ant-controls {
+.sim-controls {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
   margin-top: 0.75rem;
 }
-.ant-controls .lab-btn {
-  background: rgba(255,255,255,0.55);
-  color: var(--text);
-  box-shadow: none;
-  border: 0.5px solid rgba(255,255,255,0.7);
-}
-.ant-controls label {
+.sim-controls label {
   font-size: 0.8125rem;
   color: var(--text-3);
   display: flex;
   align-items: center;
   gap: 0.4rem;
 }
-#ant-steps {
+.sim-meta {
   font-size: 0.8125rem;
   color: var(--text-2);
   margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.math-note {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  margin-top: 0.5rem;
+  line-height: 1.5;
 }
 
 .back-link {
