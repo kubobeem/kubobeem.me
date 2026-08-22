@@ -10,6 +10,7 @@
     "deploy": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
+    "freebuff": "^0.0.153",
     "hono": "^4.7.0"
   },
   "devDependencies": {
