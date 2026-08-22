@@ -145,6 +145,7 @@ app.get('/', (c) => {
       <footer>
         <p class="brand">くぁー</p>
         <p>Hono · Cloudflare Pages · TypeScript</p>
+        <p><img src="https://count.getloli.com/@kubobeem?name=kubobeem&theme=random&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt="カウンター" /></p>
         <p>© 2026 くぁー</p>
       </footer>
     </div>
@@ -242,6 +243,7 @@ app.get('/lab', (c) => {
 
       <footer>
         <p class="brand">くぁー · 実験室</p>
+        <p><img src="https://count.getloli.com/@kubobeem?name=kubobeem&theme=random&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt="カウンター" /></p>
         <p>© 2026 くぁー</p>
       </footer>
 
