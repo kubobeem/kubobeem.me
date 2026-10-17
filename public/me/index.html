@@ -14,309 +14,163 @@
       --card: #141414;
       --hover: #1c1c1c;
     }
-
     @media (prefers-color-scheme: light) {
       :root:not([data-theme="dark"]) {
-        --bg: #fafafa;
-        --text: #111;
-        --muted: #666;
-        --border: #e0e0e0;
-        --accent: #c00;
-        --card: #fff;
-        --hover: #f5f5f5;
+        --bg: #fafafa; --text: #111; --muted: #666; --border: #e0e0e0; --accent: #c00; --card: #fff; --hover: #f5f5f5;
       }
     }
-
     [data-theme="light"] {
-      --bg: #fafafa;
-      --text: #111;
-      --muted: #666;
-      --border: #e0e0e0;
-      --accent: #c00;
-      --card: #fff;
-      --hover: #f5f5f5;
+      --bg: #fafafa; --text: #111; --muted: #666; --border: #e0e0e0; --accent: #c00; --card: #fff; --hover: #f5f5f5;
     }
-
     [data-theme="dark"] {
-      --bg: #0a0a0a;
-      --text: #e8e8e8;
-      --muted: #777;
-      --border: #222;
-      --accent: #e11;
-      --card: #141414;
-      --hover: #1c1c1c;
+      --bg: #0a0a0a; --text: #e8e8e8; --muted: #777; --border: #222; --accent: #e11; --card: #141414; --hover: #1c1c1c;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-      padding: 3rem 1.25rem 4rem;
-      max-width: 640px;
-      margin: 0 auto;
-      font-size: 15px;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      padding: 3rem 1.25rem 4rem; max-width: 640px; margin: 0 auto; font-size: 15px;
       transition: background .15s, color .15s;
     }
-
     .theme-btn {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
+      position: fixed; top: 12px; right: 12px; width: 36px; height: 36px;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+      font-size: 14px; cursor: pointer; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; z-index: 10;
     }
     .theme-btn:hover { border-color: var(--accent); }
-
-    header { margin-bottom: 2.75rem; }
-    h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.25rem;
+    header { margin-bottom: 2rem; }
+    h1 { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+    .tagline { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
+    .main-card {
+      border: 1px solid var(--border); border-radius: 10px; background: var(--card);
+      padding: 1.25rem 1.2rem; margin-bottom: 2.25rem;
     }
-    .tagline { color: var(--muted); font-size: 0.9rem; }
-
+    .main-card .handle { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .main-card .handle a { color: var(--text); text-decoration: none; }
+    .main-card .handle a:hover { color: var(--accent); }
+    .main-card .desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+    .main-card .desc strong { color: var(--text); font-weight: 500; }
     section { margin-bottom: 2.25rem; }
     h2 {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem;
     }
-
     .list {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      background: var(--card);
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--card);
     }
     .row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.7rem 1rem;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--text);
-      transition: background .1s;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.7rem 1rem; border-bottom: 1px solid var(--border);
+      text-decoration: none; color: var(--text); transition: background .1s;
     }
     .row:last-child { border-bottom: none; }
     .row:hover { background: var(--hover); }
     .row .name { font-weight: 500; }
     .badge {
-      font-size: 0.7rem;
-      padding: 0.15rem 0.45rem;
-      border-radius: 3px;
-      background: var(--border);
-      color: var(--muted);
-      font-weight: 500;
+      font-size: 0.7rem; padding: 0.15rem 0.45rem; border-radius: 3px;
+      background: var(--border); color: var(--muted); font-weight: 500;
     }
-    .badge.red {
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-    }
-
-    .pref {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-    @media (max-width: 480px) {
-      .pref { grid-template-columns: 1fr; }
-    }
+    .badge.red { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+    .pref { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    @media (max-width: 480px) { .pref { grid-template-columns: 1fr; } }
     .pref-box {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      background: var(--card);
+      border: 1px solid var(--border); border-radius: 8px; padding: 1rem; background: var(--card);
     }
-    .pref-box h3 {
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
+    .pref-box h3 { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.6rem; }
     .pref-box.hate h3 { color: var(--accent); }
-    .pref-box ul {
-      list-style: none;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
+    .pref-box ul { list-style: none; font-size: 0.85rem; color: var(--muted); }
     .pref-box li { margin-bottom: 0.25rem; }
     .pref-box li::before { content: "– "; }
-
     code {
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      font-size: 0.75rem;
-      background: var(--bg);
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      word-break: break-all;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.75rem;
+      background: var(--bg); padding: 0.2rem 0.4rem; border-radius: 4px;
+      border: 1px solid var(--border); word-break: break-all;
     }
-
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
+    footer { margin-top: 3rem; text-align: center; font-size: 0.75rem; color: var(--muted); }
   </style>
 </head>
 <body>
   <button class="theme-btn" onclick="toggleTheme()" title="テーマ切替">◐</button>
-
   <header>
     <h1>くぁー / kubobeem</h1>
-    <p class="tagline">サブ垢の集合体 · OSS · 無料 · NoLog</p>
+    <p class="tagline">サブ垢の集合体。<br>OSS・無料・NoLogが好き。有料と企業と執着が嫌い。</p>
   </header>
-
+  <div class="main-card">
+    <div class="handle"><a href="https://x.com/qa_a_aa" target="_blank">@qa_a_aa</a></div>
+    <p class="desc">
+      くぁーのメイン（表記はサブ垢）。<br>
+      X・GitHub・Hugging Face・複数ドメインを横断して動いてる。<br>
+      個人開発・TUI・分散チャット・ローカルLLMあたりをよく触る。<br>
+      <strong>好き:</strong> OSS / 無料 / NoLog　
+      <strong>嫌い:</strong> 有料 / Closed / 企業 / 執着 / 粘着 / ほぼ不可能への挑戦
+    </p>
+  </div>
   <section>
-    <h2>X</h2>
+    <h2>X Accounts</h2>
     <div class="list">
-      <a class="row" href="https://x.com/qa_a_aa" target="_blank">
-        <span class="name">@qa_a_aa</span>
-        <span class="badge">メイン</span>
-      </a>
-      <a class="row" href="https://x.com/qa_a_aa2" target="_blank">
-        <span class="name">@qa_a_aa2</span>
-      </a>
-      <a class="row" href="https://x.com/qa_a_aa3" target="_blank">
-        <span class="name">@qa_a_aa3</span>
-      </a>
-      <a class="row" href="https://x.com/qa_a_aa4" target="_blank">
-        <span class="name">@qa_a_aa4</span>
-      </a>
-      <a class="row" href="https://x.com/qa_a_aa5" target="_blank">
-        <span class="name">@qa_a_aa5</span>
-      </a>
-      <a class="row" href="https://x.com/qa_a_aa6" target="_blank">
-        <span class="name">@qa_a_aa6</span>
-        <span class="badge red">凍結</span>
-      </a>
-      <a class="row" href="https://x.com/qa____a" target="_blank">
-        <span class="name">@qa____a</span>
-        <span class="badge">不明</span>
-      </a>
+      <a class="row" href="https://x.com/qa_a_aa" target="_blank"><span class="name">@qa_a_aa</span><span class="badge">メイン</span></a>
+      <a class="row" href="https://x.com/qa_a_aa2" target="_blank"><span class="name">@qa_a_aa2</span></a>
+      <a class="row" href="https://x.com/qa_a_aa3" target="_blank"><span class="name">@qa_a_aa3</span></a>
+      <a class="row" href="https://x.com/qa_a_aa4" target="_blank"><span class="name">@qa_a_aa4</span></a>
+      <a class="row" href="https://x.com/qa_a_aa5" target="_blank"><span class="name">@qa_a_aa5</span></a>
+      <a class="row" href="https://x.com/qa_a_aa6" target="_blank"><span class="name">@qa_a_aa6</span><span class="badge red">凍結</span></a>
+      <a class="row" href="https://x.com/qa____a" target="_blank"><span class="name">@qa____a</span><span class="badge">不明</span></a>
     </div>
   </section>
-
   <section>
     <h2>GitHub</h2>
     <div class="list">
-      <a class="row" href="https://github.com/kubobeem" target="_blank">
-        <span class="name">kubobeem</span>
-        <span class="badge">メイン</span>
-      </a>
-      <a class="row" href="https://github.com/kubobeem2" target="_blank">
-        <span class="name">kubobeem2</span>
-        <span class="badge">AI</span>
-      </a>
+      <a class="row" href="https://github.com/kubobeem" target="_blank"><span class="name">kubobeem</span><span class="badge">メイン</span></a>
+      <a class="row" href="https://github.com/kubobeem2" target="_blank"><span class="name">kubobeem2</span><span class="badge">AI</span></a>
     </div>
   </section>
-
   <section>
     <h2>Hugging Face</h2>
     <div class="list">
-      <a class="row" href="https://huggingface.co/kubobeem" target="_blank">
-        <span class="name">kubobeem</span>
-      </a>
+      <a class="row" href="https://huggingface.co/kubobeem" target="_blank"><span class="name">kubobeem</span></a>
     </div>
   </section>
-
   <section>
     <h2>Site</h2>
     <div class="list">
-      <a class="row" href="https://kubobeem.me" target="_blank">
-        <span class="name">kubobeem.me</span>
-      </a>
-      <a class="row" href="https://kubobeem.tech" target="_blank">
-        <span class="name">kubobeem.tech</span>
-      </a>
-      <a class="row" href="https://kuboes.ninja" target="_blank">
-        <span class="name">kuboes.ninja</span>
-      </a>
-      <a class="row" href="https://kubobeem.f5.si" target="_blank">
-        <span class="name">kubobeem.f5.si</span>
-      </a>
+      <a class="row" href="https://kubobeem.me" target="_blank"><span class="name">kubobeem.me</span></a>
+      <a class="row" href="https://kubobeem.tech" target="_blank"><span class="name">kubobeem.tech</span></a>
+      <a class="row" href="https://kuboes.ninja" target="_blank"><span class="name">kuboes.ninja</span></a>
+      <a class="row" href="https://kubobeem.f5.si" target="_blank"><span class="name">kubobeem.f5.si</span></a>
     </div>
   </section>
-
   <section>
     <h2>Contact</h2>
     <div class="list">
-      <a class="row" href="https://mond.how/qa_a_aa2" target="_blank">
-        <span class="name">Mond</span>
-      </a>
-      <a class="row" href="https://smp11.simplex.im/a#WwuQIlTf_T4Cpzh3sHNFY00VuAzZKMMy-DINXXAkZrw" target="_blank">
-        <span class="name">SimpleX</span>
-      </a>
-      <div class="row" style="cursor:default">
-        <span class="name">Session</span>
-      </div>
+      <a class="row" href="https://mond.how/qa_a_aa2" target="_blank"><span class="name">Mond</span></a>
+      <a class="row" href="https://smp11.simplex.im/a#WwuQIlTf_T4Cpzh3sHNFY00VuAzZKMMy-DINXXAkZrw" target="_blank"><span class="name">SimpleX</span></a>
+      <div class="row" style="cursor:default"><span class="name">Session</span></div>
     </div>
     <p style="margin-top:0.6rem;font-size:0.8rem;color:var(--muted)">
       <code>0534682eed6c52c73ce25120b3d8122c04aa4f9e34eb906926241f988379404d4b</code>
     </p>
   </section>
-
   <section>
     <h2>Prefer</h2>
     <div class="pref">
       <div class="pref-box">
         <h3>好き</h3>
-        <ul>
-          <li>OSS</li>
-          <li>無料</li>
-          <li>NoLog</li>
-          <li>分散型</li>
-          <li>自分で動かせる</li>
-          <li>オープンライセンス</li>
-        </ul>
+        <ul><li>OSS</li><li>無料</li><li>NoLog</li><li>分散型</li><li>自分で動かせる</li><li>オープンライセンス</li></ul>
       </div>
       <div class="pref-box hate">
         <h3>嫌い</h3>
-        <ul>
-          <li>有料</li>
-          <li>Closedなコード</li>
-          <li>企業</li>
-          <li>大量ログ</li>
-          <li>サブスク強制</li>
-          <li>執着</li>
-          <li>粘着</li>
-          <li>ほぼ不可能への挑戦</li>
-        </ul>
+        <ul><li>有料</li><li>Closedなコード</li><li>企業</li><li>大量ログ</li><li>サブスク強制</li><li>執着</li><li>粘着</li><li>ほぼ不可能への挑戦</li></ul>
       </div>
     </div>
   </section>
-
   <section>
     <h2>Other</h2>
     <div class="list">
-      <a class="row" href="https://x.com/nukonukomain" target="_blank">
-        <span class="name">@nukonukomain</span>
-        <span class="badge">友達</span>
-      </a>
+      <a class="row" href="https://x.com/nukonukomain" target="_blank"><span class="name">@nukonukomain</span><span class="badge">友達</span></a>
     </div>
   </section>
-
   <footer>くぁーはサブ垢の集合体</footer>
-
   <script>
     function toggleTheme() {
       const html = document.documentElement;
